@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1638080124 source:c:\users\cmjpm\onedrive\documentos\patrick\faculdade patrick\trabalhos da faculdade\pim iv\código pim iv\pim iv\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+
