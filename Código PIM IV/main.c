@@ -2,6 +2,26 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+void login(){
+    char login[15] = "teste";
+    char login1[15];
+    char senha[15] = "12345";
+    char senha1[15];
+    int login_efetuado = 0;
+    printf("--------------------------------------\n\n");
+    while(login_efetuado == 0){
+        printf("Digite o Login: ");
+        scanf("%s", login1);
+        printf("\nDigite a Senha: ");
+        scanf("%s", senha1);
+        if(strcmp(login, login1) == 0 && strcmp(senha, senha1) == 0){
+            printf("\n________________LOGADO________________\n\n");
+            login_efetuado = 1;
+        }else{
+            printf("\nDados Invalidos, insira novamente.\n\n");
+        }
+    }
+}
 struct dados_paciente{
     char nome[50], email[50], cpf[50], telefone[50];
 }paciente;
@@ -86,13 +106,13 @@ void grupo_risco(){
     // Gerando o arquivo com os pacientes contaminados
     arquivo_SecSaude = fopen("Arquivo_SecSaude.txt", "a");
     fprintf(arquivo_SecSaude, "--------------------------------------------------\n");
-    fprintf(arquivo_SecSaude, "Nome: %s\n", paciente.nome);
+    fprintf(arquivo_SecSaude, "\nNome: %s\n", paciente.nome);
     fprintf(arquivo_SecSaude, "Cep: %s\n", endereco.cep);
     fprintf(arquivo_SecSaude, "Idade: %d\n", diagnostico_paciente.idade_paciente);
     if(diagnostico_paciente.comorbidade_paciente == 1){
-        fprintf(arquivo_SecSaude, "\nComorbidade: Sim\n");
+        fprintf(arquivo_SecSaude, "\nComorbidade: Sim\n\n");
     }else{
-        fprintf(arquivo_SecSaude, "\nComorbidade: Não\n");
+        fprintf(arquivo_SecSaude, "\nComorbidade: Não\n\n");
     }
     fclose(arquivo_SecSaude);
     printf("\nO arquivo foi criado com sucesso!");
@@ -177,8 +197,8 @@ void cadastro_paciente(){
             comorbidade();
             // Gerando o arquivo com os pacientes contaminados.
             pacientes_contaminados = fopen("pacientes_contaminados.txt", "a");
-            fprintf(pacientes_contaminados, "\n--------------------------------------------------\n");
-            fprintf(pacientes_contaminados, "Nome: %s\n", paciente.nome);
+            fprintf(pacientes_contaminados, "--------------------------------------------------\n");
+            fprintf(pacientes_contaminados, "\nNome: %s\n", paciente.nome);
             fprintf(pacientes_contaminados, "Cpf: %s\n", paciente.cpf);
             fprintf(pacientes_contaminados, "Idade: %d\n", diagnostico_paciente.idade_paciente);
             fprintf(pacientes_contaminados, "\nEmail: %s\n", paciente.email);
@@ -194,7 +214,7 @@ void cadastro_paciente(){
             }else{
                 fprintf(pacientes_contaminados, "Comorbidade: Não\n");
             }
-            fprintf(pacientes_contaminados, "\nData do diagnóstico: %02d/%02d/%d\n",
+            fprintf(pacientes_contaminados, "\nData do diagnóstico: %02d/%02d/%d\n\n",
                     diagnostico_paciente.dia, diagnostico_paciente.mes, diagnostico_paciente.ano);
             fclose(pacientes_contaminados);
             // Verificando se o paciente pertence ao grupo de risco.
@@ -208,7 +228,7 @@ void cadastro_paciente(){
         }else if(diagnostico == 0){
             // Arquivo para avisar aos pacientes que não estão contaminados.
             pacientes_saudaveis = fopen("pacientes_saudaveis.txt", "a");
-            fprintf(pacientes_saudaveis, "\n--------------------------------------------------\n");
+            fprintf(pacientes_saudaveis, "--------------------------------------------------\n");
             fprintf(pacientes_saudaveis, "\nNome: %s\n", paciente.nome);
             fprintf(pacientes_saudaveis, "Cpf: %s\n", paciente.cpf);
             fprintf(pacientes_saudaveis, "Telefone: %s\n", paciente.telefone);
@@ -218,7 +238,7 @@ void cadastro_paciente(){
             fprintf(pacientes_saudaveis, "Bairro: %s\n", endereco.bairro);
             fprintf(pacientes_saudaveis, "Cidade: %s\n", endereco.cidade);
             fprintf(pacientes_saudaveis, "Estado: %s\n", endereco.estado);
-            fprintf(pacientes_saudaveis, "Cep: %s\n", endereco.cep);
+            fprintf(pacientes_saudaveis, "Cep: %s\n\n", endereco.cep);
             fclose(pacientes_saudaveis);
             i = 1;
         }else{
@@ -228,6 +248,7 @@ void cadastro_paciente(){
     printf("\n-------- Paciente cadastrado com sucesso --------\n");
 }
 int main(){
+    login();
     // O usuário registra quantos pacientes quer cadastrar.
     int numero_pacientes=0, i=0;
     printf("Quantos pacientes voce quer cadastrar?\n");
